@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://uqnoptn2cdq8"]
+[gd_scene load_steps=7 format=3 uid="uid://uqnoptn2cdq8"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_f3h3s"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="2_a0xpt"]
 [ext_resource type="Script" path="res://scripts/test_input.gd" id="3_wopxh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ifrp8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4qlgx"]
+size = Vector3(0.1, 0.1, 0.5)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e6qrt"]
 
@@ -14,6 +17,10 @@ script = ExtResource("1_f3h3s")
 [node name="TestMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_ifrp8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46947, -0.668547)
+mesh = SubResource("BoxMesh_4qlgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

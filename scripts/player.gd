@@ -16,9 +16,14 @@ func _physics_process(delta: float) -> void:
 	var move_direction = Vector3.ZERO
 	var player_input_direction = Input.get_vector("left", "right"
 			, "forward", "back")
-
-	move_direction.x = player_input_direction.x
-	move_direction.z = player_input_direction.y
+	
+	var camera_forward = _camera.global_basis.z
+	var camera_right = _camera.global_basis.x
+	
+	move_direction = camera_forward * player_input_direction.y + camera_right * player_input_direction.x
+	#move_direction.x = player_input_direction.x * _camera.global_basis.x
+	#move_direction.z = player_input_direction.y * _camera.global_basis.z
+	move_direction.y = 0.0
 	move_direction = move_direction.normalized()
 	
 	var y_velocity := velocity.y
