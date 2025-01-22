@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwrylnp0qyv17"]
+[gd_scene load_steps=11 format=3 uid="uid://dwrylnp0qyv17"]
 
 [ext_resource type="PackedScene" uid="uid://uqnoptn2cdq8" path="res://scenes/player.tscn" id="1_6oqoc"]
 
@@ -18,12 +18,22 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_5epw2"]
 size = Vector3(20, 0.5, 20)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ts8ti"]
-albedo_color = Color(0, 0.564057, 0.70431, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bimt"]
+albedo_color = Color(0.739028, 0.395149, 3.85046e-07, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_a0ugr"]
-material = SubResource("StandardMaterial3D_ts8ti")
+material = SubResource("StandardMaterial3D_2bimt")
 size = Vector3(20, 0.5, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tbhsq"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6u4oq"]
+albedo_color = Color(0, 0.307206, 0.610205, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qc81f"]
+material = SubResource("StandardMaterial3D_6u4oq")
+size = Vector3(5, 5, 5)
 
 [node name="Main" type="Node3D"]
 
@@ -32,14 +42,24 @@ size = Vector3(20, 0.5, 20)
 [node name="TestWorldEnvironment" type="WorldEnvironment" parent="TestLevel"]
 environment = SubResource("Environment_o3el8")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="TestLevel"]
+[node name="TestFloor" type="RigidBody3D" parent="TestLevel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TestLevel/RigidBody3D"]
+[node name="TestFloorCollision" type="CollisionShape3D" parent="TestLevel/TestFloor"]
 shape = SubResource("BoxShape3D_5epw2")
 
-[node name="TestFloor" type="MeshInstance3D" parent="TestLevel/RigidBody3D"]
+[node name="TestFloorMesh" type="MeshInstance3D" parent="TestLevel/TestFloor"]
 mesh = SubResource("BoxMesh_a0ugr")
+skeleton = NodePath("../../..")
+
+[node name="TestObject" type="RigidBody3D" parent="TestLevel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, 7)
+
+[node name="TestObjectCollision" type="CollisionShape3D" parent="TestLevel/TestObject"]
+shape = SubResource("BoxShape3D_tbhsq")
+
+[node name="TestObjectMesh" type="MeshInstance3D" parent="TestLevel/TestObject"]
+mesh = SubResource("BoxMesh_qc81f")
 skeleton = NodePath("../../..")
 
 [node name="Player" parent="." instance=ExtResource("1_6oqoc")]

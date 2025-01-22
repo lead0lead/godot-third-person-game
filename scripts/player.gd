@@ -3,7 +3,7 @@ extends CharacterBody3D
 @export_group("Movement")
 @export var movement_speed := 8.0
 @export var acceleration := 60.0
-@export var rotation_speed := 12.0
+@export var rotation_speed := 8.0
 @export var jump_impulse := 12.0
 
 @export_group("Skin")
