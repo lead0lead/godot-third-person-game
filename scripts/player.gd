@@ -6,9 +6,13 @@ extends CharacterBody3D
 @export var rotation_speed := 12.0
 @export var jump_impulse := 12.0
 
-@onready var _camera_pivot: Node3D = %CameraPivot
+@export_group("Skin")
+@export var _character_model: MeshInstance3D
+
+#@onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %PlayerCamera
 
+var _last_move_direction := Vector3.FORWARD
 var _gravity := -50
 
 func _physics_process(delta: float) -> void:
@@ -38,3 +42,13 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_impulse
 	
 	move_and_slide()
+	
+	# handle visual rotation of character model
+	
+	if move_direction.length() > 0.0:
+		_last_move_direction = move_direction
+
+	var target_angle := Vector3.FORWARD.signed_angle_to(_last_move_direction
+		, Vector3.UP)
+	_character_model.global_rotation.y = lerp_angle(_character_model.rotation.y
+		, target_angle, rotation_speed * delta)
