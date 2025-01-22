@@ -12,8 +12,11 @@ extends CharacterBody3D
 var _gravity := -60
 
 func _physics_process(delta: float) -> void:
+	
+	
 	var move_direction = Vector3.ZERO
-	var player_input_direction = Input.get_vector("left", "right", "forward", "back")
+	var player_input_direction = Input.get_vector("left", "right"
+			, "forward", "back")
 
 	move_direction.x = player_input_direction.x
 	move_direction.z = player_input_direction.y
@@ -22,8 +25,12 @@ func _physics_process(delta: float) -> void:
 	var y_velocity := velocity.y
 	velocity.y = 0.0
 	
-	velocity = velocity.move_toward(move_direction * movement_speed, acceleration * delta)
+	velocity = velocity.move_toward(move_direction * movement_speed
+			, acceleration * delta)
 	
 	velocity.y = y_velocity + _gravity * delta
+	
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_impulse
 	
 	move_and_slide()
