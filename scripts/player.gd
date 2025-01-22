@@ -9,10 +9,9 @@ extends CharacterBody3D
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %PlayerCamera
 
-var _gravity := -60
+var _gravity := -50
 
 func _physics_process(delta: float) -> void:
-	
 	
 	var move_direction = Vector3.ZERO
 	var player_input_direction = Input.get_vector("left", "right"

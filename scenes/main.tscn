@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwrylnp0qyv17"]
+[gd_scene load_steps=8 format=3 uid="uid://dwrylnp0qyv17"]
 
 [ext_resource type="PackedScene" uid="uid://uqnoptn2cdq8" path="res://scenes/player.tscn" id="1_6oqoc"]
 
@@ -18,7 +18,11 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_5epw2"]
 size = Vector3(20, 0.5, 20)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ts8ti"]
+albedo_color = Color(0, 0.564057, 0.70431, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_a0ugr"]
+material = SubResource("StandardMaterial3D_ts8ti")
 size = Vector3(20, 0.5, 20)
 
 [node name="Main" type="Node3D"]
