@@ -1,0 +1,29 @@
+extends CharacterBody3D
+
+@export_group("Movement")
+@export var movement_speed := 8.0
+@export var acceleration := 60.0
+@export var rotation_speed := 12.0
+@export var jump_impulse := 12.0
+
+@onready var _camera_pivot: Node3D = %CameraPivot
+@onready var _camera: Camera3D = %PlayerCamera
+
+var _gravity := -60
+
+func _physics_process(delta: float) -> void:
+	var move_direction = Vector3.ZERO
+	var player_input_direction = Input.get_vector("left", "right", "forward", "back")
+
+	move_direction.x = player_input_direction.x
+	move_direction.z = player_input_direction.y
+	move_direction = move_direction.normalized()
+	
+	var y_velocity := velocity.y
+	velocity.y = 0.0
+	
+	velocity = velocity.move_toward(move_direction * movement_speed, acceleration * delta)
+	
+	velocity.y = y_velocity + _gravity * delta
+	
+	move_and_slide()
